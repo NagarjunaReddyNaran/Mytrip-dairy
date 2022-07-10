@@ -1,0 +1,89 @@
+<h1>Angular Google Maps (AGM) Demo</h1>
+
+<div>
+  <section>
+    <mat-icon color="primary">favorite</mat-icon>
+    <mat-icon color="accent">favorite</mat-icon>
+    <mat-icon color="warn">favorite</mat-icon>
+  </section>
+</div>
+<p><a href="https://angular-maps.com/" target="_blank">Official Website</a></p>
+
+<agm-map
+  [latitude]="lat"
+  [longitude]="lng"
+  [zoom]="zoom"
+  [disableDefaultUI]="false"
+  [zoomControl]="false"
+  (mapClick)="mapClicked($event)"
+>
+  <agm-overlay *ngIf="iconLabels" [latitude]="iconLabels.lat" [longitude]="iconLabels.lng">
+    <!-- blue html square -->
+    <div class="container" *ngIf="showIcons">
+      <div class="row">
+        <a href="#" class="center">
+          <mat-icon color="primary">{{ iconLabels.icons.icon2 }} </mat-icon>
+        </a>
+        <a href="#" class="center"
+          ><mat-icon color="primary">{{ iconLabels.icons.icon3 }}</mat-icon>
+        </a>
+      </div>
+      <div class="row">
+        <a href="#" class="center"
+          ><mat-icon color="primary">{{ iconLabels.icons.icon1 }}</mat-icon>
+        </a>
+      </div>
+      
+      <div class="row">
+        <a href="#" class="center"
+          ><mat-icon color="primary">{{ iconLabels.icons.icon4 }}</mat-icon>
+        </a>
+        <a href="#" class="center"
+          ><mat-icon color="primary">{{ iconLabels.icons.icon5 }}</mat-icon>
+        </a>
+      </div>
+    </div>
+  </agm-overlay>
+  <agm-marker
+    *ngFor="let m of markers; let i = index;"
+    (markerClick)="clickedMarker(m.label, i, m)"
+    [latitude]="m.lat"
+    [longitude]="m.lng"
+    [label]="m.label"
+    [markerDraggable]="m.draggable"
+    (dragEnd)="markerDragEnd(m, $event)"
+  >
+    <!-- <agm-info-window>
+      <div class="container">
+        <div class="row">
+          <a href="#" class="center">
+            <mat-icon color="primary">brightness_2 </mat-icon>
+          </a>
+          <a href="#" class="center"
+            ><mat-icon color="primary">brightness_3</mat-icon>
+          </a>
+        </div>
+        <div class="row">
+          <a href="#" class="center"
+            ><mat-icon color="primary">brightness_1</mat-icon>
+          </a>
+        </div>
+        <div class="row">
+          <a href="#" class="center"
+            ><mat-icon color="primary">brightness_4</mat-icon>
+          </a>
+          <a href="#" class="center"
+            ><mat-icon color="primary">brightness_5</mat-icon>
+          </a>
+        </div>
+      </div>
+    </agm-info-window> -->
+  </agm-marker>
+
+  <!-- <agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
+      [radius]="5000"
+      [fillColor]="'green'"
+      [circleDraggable]="true"
+      [editable]="true">
+  </agm-circle> -->
+</agm-map>
